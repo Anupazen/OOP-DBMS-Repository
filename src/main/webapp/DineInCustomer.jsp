@@ -5,8 +5,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RoomsPage</title>
+<title>Dine-In page</title>
 
 <style>
 .mybox {
@@ -15,26 +16,38 @@
 	border: 2px grey;
 }
 
-.card {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	transition: 0.3s;
-	margin-left: auto;
-	margin-right: auto;
-	margin-right: auto;
-}
 .nav-link:hover {
 	border-bottom: 3px solid Gold;
 }
-.card:hover {
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+
+#customers td, #customers th {
+	padding: 8px;
+	width: 100%
 }
 
-.container {
-	padding: 2px 16px;
+#BtnConfirm {
+	color: white;
+	border-width: 3px;
+	opacity: 0.9;
+	background-color: #C5B358;
+	border: none;
+	width: 160px;
+	height: 35px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.vl {
+	border-left: 1px solid #C0C0C0;
+	height: 155px;
+	position: absolute;
+	left: 80%;
+	margin-left: -3px;
+	top: 7px
 }
 </style>
 
-<link rel="stylesheet" href="staffmain.css">
+<link rel="stylesheet" href="roompage.css">
 
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -46,81 +59,94 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
-<body>
+<body style="background-color: #F5F5F5;">
+
+
 	<div id="header" style="z-index: 1;">
-		<ul class="nav-list">
+		<ul class="nav-list" >
 			<li><a href="MainPage.jsp" class="nav-link" style="color: black">Home</a>
 			</li>
-			<li><a href="#" class="nav-link" style="color: black">Rooms</a>
+			<li><a href="room.jsp" class="nav-link" style="color: black">Rooms</a>
 			</li>
-			<li><a href="dinein.jsp" class="nav-link" style="color: black">Dine-In</a>
+			<li><a href="#" class="nav-link" style="color: black">Dine-In</a>
 			</li>
-			<li><a href="#" class="nav-link" style="color: black">About</a>
+			<li><a href="About.jsp" class="nav-link" style="color: black">about</a>
 			</li>
 			<li><a href="staff.jsp" class="nav-link" style="color: black">Staff</a>
 			</li>
 		</ul>
 	</div>
-
-	<img src="hotelg.jpg" alt="Trulli" width="100%" height="350">
+	<Br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<Br>
+	<br>
+	
+	<img src="image/hotel5.jpg" alt="Trulli" width="100%" height="480">
+	<div style="background-color: black; height: 40px; width: 100%">
+	</div>
+	<div
+		style="background-color: white; height: 60px; width: 100%; border-color: gray">
+	</div>
 	<br>
 	<br>
 
-	<a href="AddRoom.jsp"> <button type="button" class="btn btn-success" style="float:right;margin-right: 10%;width:160px;height:35px;font-size: 15px;">+ Add Room</button></a>
-	<br>
-	<br>
-	<br>
-	<c:forEach var="apps" items="${roomdetails}">
-		<div class="card" style="margin-left: 10%; height: 190px; float: center; margin-right: 10%">
+<%
+		Dine_inView rv=new Dine_inView();
+		List<Dine_in> ro= rv.readItems();
+		request.setAttribute("Dine_in", ro);
+%>
+
+
+	<c:forEach var="apps" items="${Dine_in}">
+		<div class="card"
+			style="margin-left: 10%; height: 190px; float: center; margin-right: 10%">
 			<div class="container">
-			
 			<!--style="overflow-y:scroll"-->
 
 				<div style="width: 30%; height: 160px; float: left">
 					<img src="hotelg.jpg" alt="Trulli" width="80%" height="190"
 						style="padding: 10px 10px 10px 0px">
 				</div>
-				<div style="margin-left: 30%; height: 190px">
-					<c:set var="tid" value="${apps.tid}" />
-					<c:set var="tno" value="${apps.t_no}" />
-					<c:set var="capacity" value="${apps.capacity}" />
-					<c:set var="price" value="${apps.price}" />
-					<h3>room id:- ${apps.tid}</h3>
-					<h3>room Price:- ${apps.price}</h3>
-					<h3>room Capacity:- ${apps.capacity}</h3>
-					<h3>room number:- ${apps.t_no}</h3>
-
-					<c:url value="UpdateRoom.jsp" var="roomUpdate">
-
-						<c:param name="tid" value="${tid}" />
-						<c:param name="tno" value="${tno}" />
-						<c:param name="capacity" value="${capacity}" />
-						<c:param name="price" value="${price}" />
+				<div style="margin-left: 50%; height: 190px">
+					<c:set var="PackageID" value="${apps.packageID}" />
+					<c:set var="PackageName" value="${apps.packageName}" />
+					<c:set var="NumberOfPeople" value="${apps.numberOfPeople}" />
+					<c:set var="Price" value="${apps.price}" />
+					<c:set var="Description" value="${apps.desription}" />
+					
+					<c:url value="Reserve.jsp" var="confirm">
+						
+						<c:param name="PackageID" value="${PackageID}" />
+						<c:param name="PackageName" value="${PackageName}" />
+						<c:param name="NumberOfPeople" value="${NumberOfPeople}" />
+						<c:param name="Price" value="${Price}" />
+						<c:param name="Description" value="${Description}" />
 
 					</c:url>
-					<c:url value="DeleteRoom.jsp" var="roomDelete">
-
-						<c:param name="tid" value="${tid}" />
-						<c:param name="tno" value="${tno}" />
-						<c:param name="capacity" value="${capacity}" />
-						<c:param name="price" value="${price}" />
-
-					</c:url>
-						<a href="${roomUpdate}"> <input type="button" class="btn btn-warning"
-							href="staff.jsp" value="Update Type">
+					
+					
+					<h2 style="text-decoration: underline;font-family:Garamond">${apps.packageName}</h2><br>
+					<h3 style="font-family:Verdana">Number of People:- ${apps.numberOfPeople}</h3>
+					<h3 style="font-family:Verdana">Package Description:- ${apps.desription}</h3>
+					<br>
+	  				<h3 style="color: green; font-family: Lucida Console; font-weight: 900;">Rs ${apps.price} /=</h3>
+					
+					
+						<a href="${confirm}"> <input type="button" class="btn btn-warning"
+							href="ConfirmBook.jsp" value="Reserve" id="BtnConfirm">
 						</a>
-					<a href="${roomDelete}"><button type="button" class="btn btn-danger"
-						style="margin-left: 30px">Delete Type</button>
-						</a>
+					
 				</div>
 			</div>
 		</div>
 		<br>
 		<br>
 	</c:forEach>
-
-
 
 
 	<script>
@@ -138,13 +164,15 @@
 			}
 		}
 	</script>
+
 	<!-- footer -->
 	<div class="footer-basic">
 		<footer class="mybox">
 
 			<div class="social">
-				<br> <a href="#"><i class="icon ion-social-instagram"></i></a><a
-					href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i
+				<br>
+				<a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+					class="icon ion-social-snapchat"></i></a><a href="#"><i
 					class="icon ion-social-twitter"></i></a><a href="#"><i
 					class="icon ion-social-facebook"></i></a>
 			</div>

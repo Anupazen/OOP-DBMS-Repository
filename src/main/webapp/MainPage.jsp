@@ -12,6 +12,10 @@
 	width: 100%;
 	border: 2px grey;
 }
+.nav-link:hover {
+	border-bottom: 3px solid Gold;
+}
+
 </style>
 
 <link rel="stylesheet" href="mainpage.css">
@@ -30,13 +34,13 @@
 <body>
 	<div id="header">
 		<ul class="nav-list">
-			<li><a href="index.html" class="nav-link" style="color: black">Home</a>
+			<li><a href="#" class="nav-link" style="color: black">Home</a>
 			</li>
-			<li><a href="#" class="nav-link" style="color: black">Rooms</a>
+			<li><a href="room.jsp" class="nav-link" style="color: black">Rooms</a>
 			</li>
-			<li><a href="dinein.jsp" class="nav-link" style="color: black">Dine-In</a>
+			<li><a href="DineInCustomer.jsp" class="nav-link" style="color: black">Dine-In</a>
 			</li>
-			<li><a href="#" class="nav-link" style="color: black">About</a>
+			<li><a href="About.jsp" class="nav-link" style="color: black">About</a>
 			</li>
 			<li><a href="staff.jsp" class="nav-link" style="color: black">Staff</a>
 			</li>
@@ -45,10 +49,9 @@
 
 	<!-- remove this down-->
 
-	<img src="wcl1.jpg" alt="Trulli" width="100%" height="800">
+	<img src="image/front4.avif" alt="Trulli" width="100%" height="700">
 
 	<!-- remove this up-->
-
 
 
 
@@ -79,10 +82,10 @@
 					<center>
 						<br>
 						<h1 style="font-family: Garamond">HOTELS IN SRI LANKA</h1>
-						<h2 style="font-family: Georgia">JETWING HOTELS</h2>
+						<h2 style="font-family: Georgia">7 NEST HOTELS</h2>
 						<p style="font-family: Monaco">
 							Revel in our histories. Chase our mysteries. Discover
-							extraordinary places. Unwind in our spaces. At Jetwing Hotels, we
+							extraordinary places. Unwind in our spaces. At 7 Nest Hotels, we
 							promise you are in good hands. With the largest family of hotels
 							and villas across Sri Lanka, we are delighted to welcome you into
 							our homes found on the mountains to the coastline, and everywhere

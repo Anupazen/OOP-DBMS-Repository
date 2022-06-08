@@ -26,6 +26,7 @@ public class LoginServerlet extends HttpServlet {
 
 		int pw = Integer.parseInt(password);
 
+		
 		try {
 			boolean istrue = staffDButil.validate(username, pw);// sending data to customerDButil and capture
 																		// details
@@ -33,8 +34,11 @@ public class LoginServerlet extends HttpServlet {
 			if (istrue == true) {
 				List<Staff> stadetails= staffDButil.login(username, pw);
 				request.setAttribute("stadetails", stadetails);
-
+				roomview rv=new roomview();
+				List<rooms> ro= rv.readItems();
+				
 				if(stadetails.get(0).getDepartment().equals("Management")) {
+					request.setAttribute("roomdetails", ro);
 					RequestDispatcher dis = request.getRequestDispatcher("StaffMain.jsp");
 					dis.forward(request, response);// thest must be there
 				}
